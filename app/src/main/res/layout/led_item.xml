@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="com.example.android.bluetooth.MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/on"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36dp"
+        android:text="on"
+        android:background="#FFEB3B"
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        />
+    <TextView
+        android:id="@+id/off"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36dp"
+        android:text="off"
+        android:background="#FFEB3B"
+        android:textColor="#000"
+        android:gravity="center"/>
+</LinearLayout>
