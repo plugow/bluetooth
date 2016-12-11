@@ -30,19 +30,20 @@ public class LedActivity extends AppCompatActivity{
 
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.led_item);
-        myBluetooth=BluetoothAdapter.getDefaultAdapter();
+        myBluetooth = BluetoothAdapter.getDefaultAdapter();
 
         Intent newint = getIntent();
         address = newint.getStringExtra(BlueActivity.EXTRA_ADDRESS); //receive the address of the bluetooth device
         new ConnectBT().execute(); //Call the class to connect
 
 
-        TextView ledOn=(TextView) findViewById(R.id.on);
-        TextView ledOff=(TextView) findViewById(R.id.off);
+        TextView ledOn = (TextView) findViewById(R.id.on);
+        TextView ledOff = (TextView) findViewById(R.id.off);
 
         ledOn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,13 @@ public class LedActivity extends AppCompatActivity{
                 turnOff();
             }
         });
+
+        View decorView = getWindow().getDecorView();
+        int uiOption = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    |View.SYSTEM_UI_FLAG_FULLSCREEN
+                    |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+
+        decorView.setSystemUiVisibility(uiOption);
 
 
 

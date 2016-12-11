@@ -13,18 +13,21 @@
         android:layout_height="wrap_content"
         android:textSize="36dp"
         android:text="bluetooth"
-        android:background="#FFEB3B"
+
         android:textColor="#000"
         android:gravity="center"
         android:layout_marginBottom="16dp"
         />
+    <View
+        style="@style/Divider"/>
     <TextView
         android:id="@+id/pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="36dp"
         android:text="pin 6"
-        android:background="#FFEB3B"
+        android:layout_marginTop="16dp"
+
         android:textColor="#000"
         android:gravity="center"/>
 </LinearLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/leftUp"
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape"
+        android:layout_above="@+id/leftRight"
+        android:layout_toRightOf="@+id/leftLeft"
+        android:layout_toEndOf="@+id/leftLeft"
+
+        />
+
+    <Button
+        android:id="@+id/leftDown"
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape"
+
+
+        android:layout_below="@+id/leftLeft"
+        android:layout_alignLeft="@+id/leftUp"
+        android:layout_alignStart="@+id/leftUp" />
+
+    <Button
+        android:id="@+id/leftRight"
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape"
+
+        android:layout_marginBottom="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/leftUp"
+        />
+
+    <Button
+        android:id="@+id/leftLeft"
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape"
+
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+
+        android:layout_below="@+id/leftUp"
+        android:layout_alignParentLeft="true"
+        />
+
+
+    <Button
+        android:id="@+id/rightUp"
+
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape_yellow"
+        android:layout_above="@+id/leftRight"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="104dp"
+        android:layout_marginEnd="104dp" />
+
+    <Button
+        android:id="@+id/rightRight"
+
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape_red"
+        android:layout_marginRight="49dp"
+        android:layout_marginEnd="49dp"
+        android:layout_below="@+id/rightUp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/rightDown"
+
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape_green"
+        android:layout_below="@+id/rightRight"
+        android:layout_toRightOf="@+id/rightLeft"
+        android:layout_toEndOf="@+id/rightLeft" />
+
+    <Button
+        android:id="@+id/rightLeft"
+
+        android:text=""
+        android:textColor="#001B66"
+        android:textSize="30sp"
+
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape_blue"
+        android:layout_below="@+id/rightUp"
+        android:layout_toLeftOf="@+id/rightUp"
+        android:layout_toStartOf="@+id/rightUp" />
+
+    <Switch
+        android:text="Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rightUp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/switch1" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/rightDown"
+        android:layout_centerHorizontal="true"
+        />
+
+
+</RelativeLayout>

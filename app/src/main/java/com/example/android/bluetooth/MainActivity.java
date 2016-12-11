@@ -52,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Pin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, JogActivity.class);
+                startActivity(i);
+            }
+
+
+        });
+
+
 
 
 

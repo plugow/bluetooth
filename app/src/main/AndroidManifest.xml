@@ -27,6 +27,10 @@
             android:label="Ledy">
 
         </activity>
+        <activity android:name="JogActivity"
+            android:label="Jog Operations">
+
+        </activity>
     </application>
 
 </manifest>
