@@ -51,7 +51,7 @@ public class BlueActivity extends AppCompatActivity{
                 String address = info.substring(info.length() - 17);
 
                 // Make an intent to start next activity.
-                Intent i = new Intent(BlueActivity.this, LedActivity.class);
+                Intent i = new Intent(BlueActivity.this, JogActivity.class);
 
                 //Change the activity.
                 i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
