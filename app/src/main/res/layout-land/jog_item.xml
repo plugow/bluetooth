@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    >
 
     <Button
         android:id="@+id/leftUp"
-        android:text=""
+        android:text="3+"
         android:textColor="#001B66"
         android:textSize="30sp"
         android:layout_width="60dp"
@@ -18,7 +19,7 @@
 
     <Button
         android:id="@+id/leftDown"
-        android:text=""
+        android:text="3-"
         android:textColor="#001B66"
         android:textSize="30sp"
         android:layout_width="60dp"
@@ -32,9 +33,9 @@
 
     <Button
         android:id="@+id/leftRight"
-        android:text=""
+        android:text="open"
         android:textColor="#001B66"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/buttonshape"
@@ -47,15 +48,15 @@
 
     <Button
         android:id="@+id/leftLeft"
-        android:text=""
+        android:text="close"
         android:textColor="#001B66"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/buttonshape"
 
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
         android:layout_centerVertical="true"
 
         android:layout_below="@+id/leftUp"
@@ -66,7 +67,7 @@
     <Button
         android:id="@+id/rightUp"
 
-        android:text=""
+        android:text="2+"
         android:textColor="#001B66"
         android:textSize="30sp"
 
@@ -76,21 +77,21 @@
         android:layout_above="@+id/leftRight"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="104dp"
-        android:layout_marginEnd="104dp" />
+        android:layout_marginRight="110dp"
+        android:layout_marginEnd="110dp" />
 
     <Button
         android:id="@+id/rightRight"
 
-        android:text=""
+        android:text="1+"
         android:textColor="#001B66"
         android:textSize="30sp"
 
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/buttonshape_red"
-        android:layout_marginRight="49dp"
-        android:layout_marginEnd="49dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_below="@+id/rightUp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -98,7 +99,7 @@
     <Button
         android:id="@+id/rightDown"
 
-        android:text=""
+        android:text="2-"
         android:textColor="#001B66"
         android:textSize="30sp"
 
@@ -112,7 +113,7 @@
     <Button
         android:id="@+id/rightLeft"
 
-        android:text=""
+        android:text="1-"
         android:textColor="#001B66"
         android:textSize="30sp"
 
@@ -124,7 +125,7 @@
         android:layout_toStartOf="@+id/rightUp" />
 
     <Switch
-        android:text="Switch"
+        android:text="Jog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rightUp"
@@ -150,6 +151,7 @@
         android:id="@+id/velocityTextView"
         android:layout_alignBottom="@+id/rightDown"
         android:layout_centerHorizontal="true" />
+
 
 
 </RelativeLayout>
