@@ -76,7 +76,14 @@ public class LedActivity extends AppCompatActivity{
         {
             try
             {
-                btSocket.getOutputStream().write("*10|5|3#".toString().getBytes());
+
+
+                StringBuilder builder = new StringBuilder("alp://ppin/2/255");
+                builder.append("\n");
+                String mesg = builder.toString();
+                btSocket.getOutputStream().write(mesg.getBytes());
+                btSocket.getOutputStream().flush();
+
             }
             catch (IOException e)
             {
@@ -90,7 +97,11 @@ public class LedActivity extends AppCompatActivity{
         {
             try
             {
-                btSocket.getOutputStream().write("*10|5|2#".toString().getBytes());
+                StringBuilder builder = new StringBuilder("alp://ppin/2/1");
+                builder.append("\n");
+                String mesg = builder.toString();
+                btSocket.getOutputStream().write(mesg.getBytes());
+                btSocket.getOutputStream().flush();
             }
             catch (IOException e)
             {

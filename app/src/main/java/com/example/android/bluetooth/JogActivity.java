@@ -2,18 +2,19 @@ package com.example.android.bluetooth;
 
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothSocket;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.jakewharton.rxbinding.view.RxView;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -75,7 +76,7 @@ public class JogActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 velocity=i+1;
 
-                velocityTextView.setText("Velocity: "+velocity+"%");
+//                velocityTextView.setText("Velocity: "+velocity+"%");
 
 
             }
@@ -94,26 +95,33 @@ public class JogActivity extends AppCompatActivity {
 
         Button rightRight=(Button) findViewById(R.id.rightRight);
 
-        rightRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
 
-                    case MotionEvent.ACTION_DOWN:
+//        rightRight.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                switch (motionEvent.getAction()) {
+//
+//                    case MotionEvent.ACTION_DOWN:
+//
+//                        if(pressedUp == false){
+//                            pressedUp = true;
+//                            new SendVolumeUpTask().execute();
+//                        }
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        velocityTextView.setText("Velocity: "+velocity+"%");
+//                        pressedUp = false;
+//
+//                }
+//                return true;
+//            }
+//        });
 
-                        if(pressedUp == false){
-                            pressedUp = true;
-                            new SendVolumeUpTask().execute();
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        velocityTextView.setText("Velocity: "+velocity+"%");
-                        pressedUp = false;
 
-                }
-                return true;
-            }
-        });
+        RxView.clicks(rightRight)
+                .subscribe(aVoid ->velocityTextView.setText("papapa") );
+//        RxView.touches(rightRight)
+//                .subscribe()
 
 
 

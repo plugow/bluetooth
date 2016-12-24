@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,25 +40,17 @@ public class MainActivity extends AppCompatActivity {
         TextView Pin=(TextView) findViewById(R.id.pin);
 
 
-        Blue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent blueIntent = new Intent(MainActivity.this,BlueActivity.class);
-                // Start the new activity
-                startActivity(blueIntent);
-
-            }
-        });
-
-        Pin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, JogActivity.class);
-                startActivity(i);
-            }
+        Blue.setOnClickListener(e->{
+                    Intent blueIntent = new Intent(MainActivity.this,BlueActivity.class);
+                    startActivity(blueIntent);
+        }
+        );
 
 
+
+        Pin.setOnClickListener(e->{
+                    Intent i = new Intent(MainActivity.this, JogActivity.class);
+                    startActivity(i);
         });
 
 

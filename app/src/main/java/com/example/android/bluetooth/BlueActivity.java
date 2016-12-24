@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,24 +38,18 @@ public class BlueActivity extends AppCompatActivity{
 
         final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list2);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                //Toast.makeText(NumbersActivity.this,"działa",Toast.LENGTH_SHORT).show();
-                ;
-                Toast.makeText(getApplicationContext(),"dziala",Toast.LENGTH_LONG).show();
-                String info = ((TextView) view).getText().toString();
-                String address = info.substring(info.length() - 17);
 
-                // Make an intent to start next activity.
-                Intent i = new Intent(BlueActivity.this, JogActivity.class);
+        listView.setOnItemClickListener((parent,view,position,id)->{
+            Toast.makeText(getApplicationContext(),"dziala",Toast.LENGTH_LONG).show();
+            String info = ((TextView) view).getText().toString();
+            String address = info.substring(info.length() - 17);
 
-                //Change the activity.
-                i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
-                startActivity(i);
+            // Make an intent to start next activity.
+            Intent i = new Intent(BlueActivity.this, JogActivity.class);
 
-            }
+            //Change the activity.
+            i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
+            startActivity(i);
         });
 
 
