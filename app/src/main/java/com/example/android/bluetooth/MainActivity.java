@@ -10,13 +10,13 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 
-    private BluetoothAdapter mBluetoothAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BluetoothAdapter mBluetoothAdapter;
 
         mBluetoothAdapter=BluetoothAdapter.getDefaultAdapter();
         if(mBluetoothAdapter==null){
