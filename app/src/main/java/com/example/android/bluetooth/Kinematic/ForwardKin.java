@@ -16,10 +16,10 @@ public class ForwardKin {
         float [][] P03;
         float [][] P04;
         float[][] xyzValue=new float[4][3];
-        float[] alfa={(float)Math.PI/2, 0, 0, (float)Math.PI/2, 0};
-        float[] a={0, 450, 350, 0, 0};
-        float[] d={200, 0, 0, 0, 137};
-        float[] theta={theta1, theta2, theta3, -(theta3+theta2), 0};
+        float[] alfa={(float)Math.PI/2, 0, 0, 0, (float)Math.PI/2};
+        float[] a={0, 84, 83, 45, 0};
+        float[] d={64, 0, 0, 0, 0};
+        float[] theta={theta1, theta2, theta3, -(theta3+theta2), (float)Math.PI/2};
         float[][] t=(new MatrixHelper()).getIdentity(4);
 
         int MAX_LEVELS=6;

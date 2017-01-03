@@ -19,9 +19,9 @@ import java.util.UUID;
 
 
 public class JogActivity extends AppCompatActivity {
-    private int angle;
     private int velocity;
     boolean pressedUp;
+    boolean isPlus;
     private TextView velocityTextView;
     private SeekBar velocityBar;
     String address = null;
@@ -37,15 +37,11 @@ public class JogActivity extends AppCompatActivity {
     private int angleValue2;
     private int angleValue3;
     private int angleValue4;
-    private int angleValue11;
-    private int angleValue22;
-    private int angleValue33;
+
     private int xValue;
     private int yValue;
     private int zValue;
-    private int xxValue;
-    private int yyValue;
-    private int zzValue;
+
 
     BluetoothAdapter myBluetooth = null;
     BluetoothSocket btSocket = null;
@@ -57,15 +53,30 @@ public class JogActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jog_item);
+
+        // set id to variables
+        velocityBar = (SeekBar) findViewById(R.id.seekBar);
+        firstPlus =(Button) findViewById(R.id.firstPlus);
+        firstMinus =(Button) findViewById(R.id.firstMinus);
+        secondPlus =(Button) findViewById(R.id.secondPlus);
+        secondMinus =(Button) findViewById(R.id.secondMinus);
+        thirdPlus =(Button) findViewById(R.id.thirdPlus);
+        thirdMinus =(Button) findViewById(R.id.thirdMinus);
+        velocityTextView=(TextView) findViewById(R.id.velocityTextView);
+
+
+        // initialize values of variables
         velocity=100;
-        angleValue1=90;
+        angleValue1=0;
         angleValue2=90;
-        angleValue3=90;
+        angleValue3=-90;
         angleValue4=90;
         pressedUp = false;
-        velocityTextView=(TextView) findViewById(R.id.velocityTextView);
-        myBluetooth = BluetoothAdapter.getDefaultAdapter();
+        isPlus=true;
 
+
+        // data for bluetooth handling from BlueActivity
+        myBluetooth = BluetoothAdapter.getDefaultAdapter();
         Intent newint = getIntent();
         address = newint.getStringExtra(BlueActivity.EXTRA_ADDRESS); //receive the address of the bluetooth device
         new ConnectBT().execute(); //Call the class to connect
@@ -79,10 +90,7 @@ public class JogActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOption);
 
 
-        // checking and handling seekbar
-        velocityBar = (SeekBar) findViewById(R.id.seekBar);
-        firstPlus =(Button) findViewById(R.id.firstPlus);
-        firstMinus =(Button) findViewById(R.id.firstMinus);
+
 
 
 
@@ -118,22 +126,19 @@ public class JogActivity extends AppCompatActivity {
         });
 
 
-
-
-
         firstPlus.setOnTouchListener((view, motionEvent) ->{
 
                 switch (motionEvent.getAction()) {
 
                     case MotionEvent.ACTION_DOWN:
-
+                        isPlus=true;
                         if(!pressedUp){
                             pressedUp = true;
                             new SendPosition().execute();
                         }
                         break;
                     case MotionEvent.ACTION_UP:
-                        velocityTextView.setText("Velocity: "+velocity+"%");
+
                         pressedUp = false;
 
                 }
@@ -145,14 +150,14 @@ public class JogActivity extends AppCompatActivity {
             switch (motionEvent.getAction()) {
 
                 case MotionEvent.ACTION_DOWN:
-
+                    isPlus=false;
                     if(!pressedUp){
                         pressedUp = true;
                         new SendPosition().execute();
                     }
                     break;
                 case MotionEvent.ACTION_UP:
-                    velocityTextView.setText("Velocity: "+velocity+"%");
+
                     pressedUp = false;
 
             }
