@@ -1,6 +1,5 @@
 package com.example.android.bluetooth;
 
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -9,24 +8,45 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-import com.jakewharton.rxbinding.view.RxView;
 
 import java.io.IOException;
 import java.util.UUID;
 
 
 public class JogActivity extends AppCompatActivity {
-    int velocity;
+    private int angle;
+    private int velocity;
     boolean pressedUp;
-    TextView velocityTextView;
-    SeekBar velocityBar;
+    private TextView velocityTextView;
+    private SeekBar velocityBar;
     String address = null;
-    private ProgressDialog progress;
+
+    private Button firstPlus;
+    private Button firstMinus;
+    private Button secondPlus;
+    private Button secondMinus;
+    private Button thirdPlus;
+    private Button thirdMinus;
+
+    private int angleValue1;
+    private int angleValue2;
+    private int angleValue3;
+    private int angleValue4;
+    private int angleValue11;
+    private int angleValue22;
+    private int angleValue33;
+    private int xValue;
+    private int yValue;
+    private int zValue;
+    private int xxValue;
+    private int yyValue;
+    private int zzValue;
+
     BluetoothAdapter myBluetooth = null;
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
@@ -37,8 +57,11 @@ public class JogActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jog_item);
-
-        velocity=90;
+        velocity=100;
+        angleValue1=90;
+        angleValue2=90;
+        angleValue3=90;
+        angleValue4=90;
         pressedUp = false;
         velocityTextView=(TextView) findViewById(R.id.velocityTextView);
         myBluetooth = BluetoothAdapter.getDefaultAdapter();
@@ -58,6 +81,8 @@ public class JogActivity extends AppCompatActivity {
 
         // checking and handling seekbar
         velocityBar = (SeekBar) findViewById(R.id.seekBar);
+        firstPlus =(Button) findViewById(R.id.firstPlus);
+        firstMinus =(Button) findViewById(R.id.firstMinus);
 
 
 
@@ -76,7 +101,7 @@ public class JogActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 velocity=i+1;
 
-//                velocityTextView.setText("Velocity: "+velocity+"%");
+               velocityTextView.setText("Velocity: "+velocity+"%");
 
 
             }
@@ -93,35 +118,50 @@ public class JogActivity extends AppCompatActivity {
         });
 
 
-        Button rightRight=(Button) findViewById(R.id.rightRight);
 
 
-//        rightRight.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()) {
-//
-//                    case MotionEvent.ACTION_DOWN:
-//
-//                        if(pressedUp == false){
-//                            pressedUp = true;
-//                            new SendVolumeUpTask().execute();
-//                        }
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        velocityTextView.setText("Velocity: "+velocity+"%");
-//                        pressedUp = false;
-//
-//                }
-//                return true;
-//            }
-//        });
+
+        firstPlus.setOnTouchListener((view, motionEvent) ->{
+
+                switch (motionEvent.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+
+                        if(!pressedUp){
+                            pressedUp = true;
+                            new SendPosition().execute();
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        velocityTextView.setText("Velocity: "+velocity+"%");
+                        pressedUp = false;
+
+                }
+                return true;
+
+        });
+
+        firstMinus.setOnTouchListener((view, motionEvent) -> {
+            switch (motionEvent.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+
+                    if(!pressedUp){
+                        pressedUp = true;
+                        new SendPosition().execute();
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    velocityTextView.setText("Velocity: "+velocity+"%");
+                    pressedUp = false;
+
+            }
+            return true;
+        });
 
 
-        RxView.clicks(rightRight)
-                .subscribe(aVoid ->velocityTextView.setText("papapa") );
-//        RxView.touches(rightRight)
-//                .subscribe()
+
+
 
 
 
@@ -134,15 +174,17 @@ public class JogActivity extends AppCompatActivity {
 
 
 
-    class SendVolumeUpTask extends AsyncTask<Void, Void, Void> {
+    class SendPosition extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... arg0) {
             while (pressedUp) {
 
                 try {
-                    velocity += 1;
-                    btSocket.getOutputStream().write(("alp://tone/6/"+velocity+"/255/").toString().getBytes());
+                    angleValue1 += 1;
+                    String msg=blueMessage(1,angleValue1,velocity);
+                    btSocket.getOutputStream().write(msg.getBytes());
+                    btSocket.getOutputStream().flush();
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -183,6 +225,21 @@ public class JogActivity extends AppCompatActivity {
 
             return null;
         }
+    }
+
+
+    private String blueMessage(int pin, int angle, int velocity){
+        StringBuilder builder = new StringBuilder("alp://tone/");
+        builder.append(pin);
+        builder.append("/");
+        builder.append(angle);
+        builder.append("/");
+        builder.append(velocity);
+        builder.append("\n");
+        String msg = builder.toString();
+        return msg;
+
+
     }
 
 

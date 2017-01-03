@@ -4,21 +4,21 @@
     >
 
     <Button
-        android:id="@+id/leftUp"
+        android:id="@+id/thirdPlus"
         android:text="3+"
         android:textColor="#001B66"
         android:textSize="30sp"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/buttonshape"
-        android:layout_above="@+id/leftRight"
-        android:layout_toRightOf="@+id/leftLeft"
-        android:layout_toEndOf="@+id/leftLeft"
+        android:layout_above="@+id/open"
+        android:layout_toRightOf="@+id/close"
+        android:layout_toEndOf="@+id/close"
 
         />
 
     <Button
-        android:id="@+id/leftDown"
+        android:id="@+id/thirdMinus"
         android:text="3-"
         android:textColor="#001B66"
         android:textSize="30sp"
@@ -27,12 +27,12 @@
         android:background="@drawable/buttonshape"
 
 
-        android:layout_below="@+id/leftLeft"
-        android:layout_alignLeft="@+id/leftUp"
-        android:layout_alignStart="@+id/leftUp" />
+        android:layout_below="@+id/close"
+        android:layout_alignLeft="@+id/thirdPlus"
+        android:layout_alignStart="@+id/thirdPlus" />
 
     <Button
-        android:id="@+id/leftRight"
+        android:id="@+id/open"
         android:text="open"
         android:textColor="#001B66"
         android:textSize="18sp"
@@ -43,11 +43,11 @@
         android:layout_centerVertical="true"
         android:layout_marginBottom="140dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/leftUp"
+        android:layout_toRightOf="@+id/thirdPlus"
         />
 
     <Button
-        android:id="@+id/leftLeft"
+        android:id="@+id/close"
         android:text="close"
         android:textColor="#001B66"
         android:textSize="18sp"
@@ -59,13 +59,13 @@
         android:layout_marginStart="50dp"
         android:layout_centerVertical="true"
 
-        android:layout_below="@+id/leftUp"
+        android:layout_below="@+id/thirdPlus"
         android:layout_alignParentLeft="true"
         />
 
 
     <Button
-        android:id="@+id/rightUp"
+        android:id="@+id/secondPlus"
 
         android:text="2+"
         android:textColor="#001B66"
@@ -74,14 +74,14 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/buttonshape_yellow"
-        android:layout_above="@+id/leftRight"
+        android:layout_above="@+id/open"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="110dp"
         android:layout_marginEnd="110dp" />
 
     <Button
-        android:id="@+id/rightRight"
+        android:id="@+id/firstPlus"
 
         android:text="1+"
         android:textColor="#001B66"
@@ -92,12 +92,12 @@
         android:background="@drawable/buttonshape_red"
         android:layout_marginRight="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_below="@+id/rightUp"
+        android:layout_below="@+id/secondPlus"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:id="@+id/rightDown"
+        android:id="@+id/secondMinus"
 
         android:text="2-"
         android:textColor="#001B66"
@@ -106,12 +106,12 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/buttonshape_green"
-        android:layout_below="@+id/rightRight"
-        android:layout_toRightOf="@+id/rightLeft"
-        android:layout_toEndOf="@+id/rightLeft" />
+        android:layout_below="@+id/firstPlus"
+        android:layout_toRightOf="@+id/firstMinus"
+        android:layout_toEndOf="@+id/firstMinus" />
 
     <Button
-        android:id="@+id/rightLeft"
+        android:id="@+id/firstMinus"
 
         android:text="1-"
         android:textColor="#001B66"
@@ -120,15 +120,15 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/buttonshape_blue"
-        android:layout_below="@+id/rightUp"
-        android:layout_toLeftOf="@+id/rightUp"
-        android:layout_toStartOf="@+id/rightUp" />
+        android:layout_below="@+id/secondPlus"
+        android:layout_toLeftOf="@+id/secondPlus"
+        android:layout_toStartOf="@+id/secondPlus" />
 
     <Switch
         android:text="Jog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/rightUp"
+        android:layout_above="@+id/secondPlus"
         android:layout_centerHorizontal="true"
         android:id="@+id/switch1" />
 
@@ -140,7 +140,7 @@
         android:max="99"
         android:progress="1"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/rightDown"
+        android:layout_below="@+id/secondMinus"
         />
 
     <TextView
@@ -149,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/velocityTextView"
-        android:layout_alignBottom="@+id/rightDown"
+        android:layout_alignBottom="@+id/secondMinus"
         android:layout_centerHorizontal="true" />
 
 

@@ -14,14 +14,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Set;
 
-/**
- * Created by Pawel on 2016-11-03.
- */
 
 
 public class BlueActivity extends AppCompatActivity{
 
-    private Set<BluetoothDevice> pairedDevices=null;
+
     private BluetoothAdapter mBluetoothAdapter;
     public static String EXTRA_ADDRESS = "device_address";
 
@@ -30,13 +27,14 @@ public class BlueActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_item);
+
         mBluetoothAdapter=BluetoothAdapter.getDefaultAdapter();
 
 
         ListView listView=(ListView) findViewById(R.id.list);
         ArrayList list2=pairedDevicesList();
 
-        final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list2);
+        final ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, list2);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent,view,position,id)->{
@@ -57,8 +55,10 @@ public class BlueActivity extends AppCompatActivity{
 
     private ArrayList pairedDevicesList()
     {
+        Set<BluetoothDevice> pairedDevices;
         pairedDevices = mBluetoothAdapter.getBondedDevices();
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<>();
+
 
         if (pairedDevices.size()>0)
         {
