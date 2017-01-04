@@ -20,6 +20,7 @@ import java.util.UUID;
 
 public class JogActivity extends AppCompatActivity {
     private int velocity;
+    private Integer sentVelocity;
     boolean pressedUp;
     boolean isPlus;
     private TextView velocityTextView;
@@ -66,10 +67,11 @@ public class JogActivity extends AppCompatActivity {
 
 
         // initialize values of variables
-        velocity=100;
-        angleValue1=0;
+        velocity=1;
+        sentVelocity=100;
+        angleValue1=90;
         angleValue2=90;
-        angleValue3=-90;
+        angleValue3=90;
         angleValue4=90;
         pressedUp = false;
         isPlus=true;
@@ -108,6 +110,7 @@ public class JogActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 velocity=i+1;
+                sentVelocity=101-velocity;
 
                velocityTextView.setText("Velocity: "+velocity+"%");
 
@@ -131,10 +134,11 @@ public class JogActivity extends AppCompatActivity {
                 switch (motionEvent.getAction()) {
 
                     case MotionEvent.ACTION_DOWN:
+
                         isPlus=true;
                         if(!pressedUp){
                             pressedUp = true;
-                            new SendPosition().execute();
+                            new SendPosition().execute(1,1,sentVelocity);
                         }
                         break;
                     case MotionEvent.ACTION_UP:
@@ -153,7 +157,81 @@ public class JogActivity extends AppCompatActivity {
                     isPlus=false;
                     if(!pressedUp){
                         pressedUp = true;
-                        new SendPosition().execute();
+                        new SendPosition().execute(1,0,sentVelocity);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+
+                    pressedUp = false;
+
+            }
+            return true;
+        });
+
+        secondPlus.setOnTouchListener((view, motionEvent) -> {
+            switch (motionEvent.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    isPlus=false;
+                    if(!pressedUp){
+                        pressedUp = true;
+                        new SendPosition().execute(2,1,sentVelocity);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+
+                    pressedUp = false;
+
+            }
+            return true;
+        });
+
+        secondMinus.setOnTouchListener((view, motionEvent) -> {
+            switch (motionEvent.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    isPlus=false;
+                    if(!pressedUp){
+                        pressedUp = true;
+                        new SendPosition().execute(2,0,sentVelocity);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+
+                    pressedUp = false;
+
+            }
+            return true;
+        });
+
+        thirdPlus.setOnTouchListener((view, motionEvent) -> {
+            switch (motionEvent.getAction()) {
+
+
+                case MotionEvent.ACTION_DOWN:
+
+                    isPlus=false;
+                    if(!pressedUp){
+                        pressedUp = true;
+                        new SendPosition().execute(3,1,sentVelocity);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+
+                    pressedUp = false;
+
+            }
+            return true;
+        });
+
+        thirdMinus.setOnTouchListener((view, motionEvent) -> {
+            switch (motionEvent.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    isPlus=false;
+                    if(!pressedUp){
+                        pressedUp = true;
+                        new SendPosition().execute(3,0,sentVelocity);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
@@ -174,23 +252,50 @@ public class JogActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
 
 
-    class SendPosition extends AsyncTask<Void, Void, Void> {
+    class SendPosition extends AsyncTask<Integer, Void, Void> {
 
         @Override
-        protected Void doInBackground(Void... arg0) {
+        protected Void doInBackground(Integer... integers) {
             while (pressedUp) {
 
+
                 try {
-                    angleValue1 += 1;
-                    String msg=blueMessage(1,angleValue1,velocity);
-                    btSocket.getOutputStream().write(msg.getBytes());
-                    btSocket.getOutputStream().flush();
-                    Thread.sleep(100);
+                    if(integers[0]==1){
+                        if (integers[1]==1)angleValue1 += 1;
+                        else angleValue1 -= 1;
+                        String msg=blueMessage(1,angleValue1,255);
+                        btSocket.getOutputStream().write(msg.getBytes());
+                        btSocket.getOutputStream().flush();
+                        Thread.sleep(integers[2]);
+                    }
+
+                    if(integers[0]==2){
+                        if (integers[1]==1)angleValue2 += 1;
+                        else angleValue2 -= 1;
+                        String msg=blueMessage(2,angleValue2,255);
+                        btSocket.getOutputStream().write(msg.getBytes());
+                        btSocket.getOutputStream().flush();
+                        Thread.sleep(integers[2]);
+                    }
+
+                    if(integers[0]==3){
+                        if (integers[1]==1)angleValue3 += 1;
+                        else angleValue3 -= 1;
+                        String msg=blueMessage(3,angleValue3,255);
+                        btSocket.getOutputStream().write(msg.getBytes());
+                        btSocket.getOutputStream().flush();
+                        Thread.sleep(integers[2]);
+                    }
+
+
+
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -201,7 +306,33 @@ public class JogActivity extends AppCompatActivity {
             }
             return null;
         }
+
+
     }
+
+//    class SendPositionMinus extends AsyncTask<Void, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Void... arg0) {
+//            while (pressedUp) {
+//
+//                try {
+//                    angleValue1 -= 1;
+//                    String msg=blueMessage(1,angleValue1,velocity);
+//                    btSocket.getOutputStream().write(msg.getBytes());
+//                    btSocket.getOutputStream().flush();
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                catch (IOException ee){
+//                    ee.printStackTrace();
+//                }
+//
+//            }
+//            return null;
+//        }
+//    }
 
 
 
