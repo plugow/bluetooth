@@ -52,7 +52,7 @@ public class ForwardKin {
             tt[kk+1]=multMatrix(tt[kk],bigT);
         }
 
-        P04=multMatrix(tt[5],P1);
+        P04=multMatrix(tt[4],P1);
         P03=multMatrix(tt[3],P1);
         P02=multMatrix(tt[2],P1);
         P01=multMatrix(tt[1],P1);

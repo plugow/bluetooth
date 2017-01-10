@@ -11,8 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.example.android.bluetooth.Kinematic.ForwardKin;
+import com.example.android.bluetooth.Kinematic.InversKin;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -26,6 +31,7 @@ public class JogActivity extends AppCompatActivity {
     private TextView velocityTextView;
     private SeekBar velocityBar;
     String address = null;
+    private Switch modeSwitch;
 
     private Button firstPlus;
     private Button firstMinus;
@@ -64,6 +70,7 @@ public class JogActivity extends AppCompatActivity {
         thirdPlus =(Button) findViewById(R.id.thirdPlus);
         thirdMinus =(Button) findViewById(R.id.thirdMinus);
         velocityTextView=(TextView) findViewById(R.id.velocityTextView);
+        modeSwitch=(Switch) findViewById(R.id.modeSwitch);
 
 
         // initialize values of variables
@@ -93,11 +100,6 @@ public class JogActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
     }
 
 
@@ -105,6 +107,26 @@ public class JogActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+
+        modeSwitch.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b)->{
+            if(b){
+                modeSwitch.setText("Cartesian");
+                float[][] results;
+                ForwardKin forwardKin=new ForwardKin();
+                results=forwardKin.forward((float) Math.toRadians(angleValue1),(float) Math.toRadians(angleValue2),-(float) Math.toRadians(angleValue3));
+                xValue= (int) results[3][0];
+                yValue= (int) results[3][1];
+                zValue= (int) results[3][2];
+
+            }
+            else modeSwitch.setText("Jog");
+
+
+        });
+
+
+
 
         velocityBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -138,7 +160,9 @@ public class JogActivity extends AppCompatActivity {
                         isPlus=true;
                         if(!pressedUp){
                             pressedUp = true;
-                            new SendPosition().execute(1,1,sentVelocity);
+                            if (modeSwitch.isChecked()) new SendCartesianPosition().execute(1,1,sentVelocity);
+                            else new SendJogPosition().execute(1,1,sentVelocity);
+
                         }
                         break;
                     case MotionEvent.ACTION_UP:
@@ -157,7 +181,9 @@ public class JogActivity extends AppCompatActivity {
                     isPlus=false;
                     if(!pressedUp){
                         pressedUp = true;
-                        new SendPosition().execute(1,0,sentVelocity);
+                        if (modeSwitch.isChecked()) new SendCartesianPosition().execute(1,0,sentVelocity);
+                        else new SendJogPosition().execute(1,0,sentVelocity);
+
                     }
                     break;
                 case MotionEvent.ACTION_UP:
@@ -175,7 +201,9 @@ public class JogActivity extends AppCompatActivity {
                     isPlus=false;
                     if(!pressedUp){
                         pressedUp = true;
-                        new SendPosition().execute(2,1,sentVelocity);
+                        if (modeSwitch.isChecked()) new SendCartesianPosition().execute(2,1,sentVelocity);
+                        else new SendJogPosition().execute(2,1,sentVelocity);
+
                     }
                     break;
                 case MotionEvent.ACTION_UP:
@@ -193,7 +221,9 @@ public class JogActivity extends AppCompatActivity {
                     isPlus=false;
                     if(!pressedUp){
                         pressedUp = true;
-                        new SendPosition().execute(2,0,sentVelocity);
+                        if (modeSwitch.isChecked()) new SendCartesianPosition().execute(2,0,sentVelocity);
+                        else new SendJogPosition().execute(2,0,sentVelocity);
+
                     }
                     break;
                 case MotionEvent.ACTION_UP:
@@ -213,7 +243,8 @@ public class JogActivity extends AppCompatActivity {
                     isPlus=false;
                     if(!pressedUp){
                         pressedUp = true;
-                        new SendPosition().execute(3,1,sentVelocity);
+                        if (modeSwitch.isChecked()) new SendCartesianPosition().execute(3,1,sentVelocity);
+                        else new SendJogPosition().execute(3,1,sentVelocity);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
@@ -231,7 +262,8 @@ public class JogActivity extends AppCompatActivity {
                     isPlus=false;
                     if(!pressedUp){
                         pressedUp = true;
-                        new SendPosition().execute(3,0,sentVelocity);
+                        if (modeSwitch.isChecked()) new SendCartesianPosition().execute(3,0,sentVelocity);
+                        else new SendJogPosition().execute(3,0,sentVelocity);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
@@ -258,7 +290,7 @@ public class JogActivity extends AppCompatActivity {
 
 
 
-    class SendPosition extends AsyncTask<Integer, Void, Void> {
+    class SendJogPosition extends AsyncTask<Integer, Void, Void> {
 
         @Override
         protected Void doInBackground(Integer... integers) {
@@ -309,6 +341,75 @@ public class JogActivity extends AppCompatActivity {
 
 
     }
+
+
+    class SendCartesianPosition extends AsyncTask<Integer, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            while (pressedUp) {
+
+
+                try {
+
+
+
+                    if(integers[0]==1){
+                        if (integers[1]==1)xValue += 1;
+                        else xValue -= 1;
+                        sendCartesian();
+                        Thread.sleep(integers[2]);
+                    }
+
+                    if(integers[0]==2){
+                        if (integers[1]==1)yValue += 1;
+                        else yValue -= 1;
+                        sendCartesian();
+                        Thread.sleep(integers[2]);
+                    }
+
+                    if(integers[0]==3){
+                        if (integers[1]==1)zValue += 1;
+                        else zValue -= 1;
+                        sendCartesian();
+                        Thread.sleep(integers[2]);
+                    }
+
+
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return null;
+        }
+        private void sendCartesian(){
+            try {
+                double[] thetaValue;
+                thetaValue= InversKin.inverse(xValue,yValue,zValue);
+                angleValue1=(int) Math.round(Math.toDegrees(thetaValue[0]));
+                angleValue2=(int) Math.round(Math.toDegrees(thetaValue[1]));
+                angleValue3=-(int) Math.round(Math.toDegrees(thetaValue[2]));
+                String msg=blueMessage(1,angleValue1,255);
+                String msg2=blueMessage(2,180-angleValue2,255);
+                String msg3=blueMessage(3,angleValue3,255);
+                btSocket.getOutputStream().write(msg.getBytes());
+                btSocket.getOutputStream().write(msg2.getBytes());
+                btSocket.getOutputStream().write(msg3.getBytes());
+                btSocket.getOutputStream().flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
+    }
+
+
 
 //    class SendPositionMinus extends AsyncTask<Void, Void, Void> {
 //
