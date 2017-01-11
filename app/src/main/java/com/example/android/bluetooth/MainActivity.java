@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
         //find TextViews
 
-        TextView Blue=(TextView) findViewById(R.id.bluetooth);
-        TextView Pin=(TextView) findViewById(R.id.pin);
+        TextView connectButton=(TextView) findViewById(R.id.bluetooth);
+        TextView aboutButton=(TextView) findViewById(R.id.about);
 
 
-        Blue.setOnClickListener(e->{
+        connectButton.setOnClickListener(e->{
                     Intent blueIntent = new Intent(MainActivity.this,BlueActivity.class);
                     startActivity(blueIntent);
         }
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Pin.setOnClickListener(e->{
+        aboutButton.setOnClickListener(e->{
                     Intent i = new Intent(MainActivity.this, JogActivity.class);
                     startActivity(i);
         });

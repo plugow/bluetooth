@@ -34,7 +34,7 @@ public class BlueActivity extends AppCompatActivity{
         ListView listView=(ListView) findViewById(R.id.list);
         ArrayList list2=pairedDevicesList();
 
-        final ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, list2);
+        final ArrayAdapter adapter = new ArrayAdapter<>(this,R.layout.row_list_view, list2);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent,view,position,id)->{
