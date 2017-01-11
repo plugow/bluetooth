@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">bluetooth</string>
+    <string name="about">Aplikacja pozwalająca sterować manipulatorem Pantograph poprzez połączenie Bluetooth\n\n\nWłasność Paweł Ługowski</string>
 </resources>

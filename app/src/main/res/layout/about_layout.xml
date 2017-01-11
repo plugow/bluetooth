@@ -8,23 +8,26 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="PantographApp"
+
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
+        />
+    <TextView
         android:id="@+id/on"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="36dp"
-        android:text="on"
-        android:background="#FFEB3B"
+        android:textSize="26sp"
+        android:text="@string/about"
+
         android:textColor="#000"
         android:gravity="center"
         android:layout_marginBottom="16dp"
         />
-    <TextView
-        android:id="@+id/off"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="36dp"
-        android:text="off"
-        android:background="#FFEB3B"
-        android:textColor="#000"
-        android:gravity="center"/>
+
 </LinearLayout>

@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         aboutButton.setOnClickListener(e->{
-                    Intent i = new Intent(MainActivity.this, JogActivity.class);
+                    Intent i = new Intent(MainActivity.this, AboutActivity.class);
                     startActivity(i);
         });
 

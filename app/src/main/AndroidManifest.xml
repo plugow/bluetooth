@@ -23,10 +23,10 @@
             android:label="Paired Devices">
         </activity>
 
-        <activity android:name="LedActivity"
-            android:label="Ledy">
-
+        <activity android:name=".AboutActivity"
+            android:label="About">
         </activity>
+
         <activity android:name="JogActivity"
             android:label="Jog Operations"
             android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation">
